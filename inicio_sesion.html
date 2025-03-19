@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Registro</title>
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="56x56"
+      href="assets/img/logo.png"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <!-- CSS responsive -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Js -->
+    <script src="assets/js/script.js"></script>
+  </head>
+  <body>
+    <main class="inicio-sesion">
+      <div class="login">
+        <form
+          action="assets/php/controlador/controlador_inicio_sesion.php"
+          method="POST"
+          class="formulario"
+        >
+          <h2>Iniciar Sesión</h2>
+          <div class="input-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit" class="btn">INICIAR SESIÓN</button>
+          <p class="registrar">
+            Soy nuevo en Gimnasio Online.
+            <span class="crear_cuenta">Crear cuenta</span>
+          </p>
+        </form>
+      </div>
+      <div class="registro">
+        <form
+          action="assets/php/controlador/controlador_registro.php"
+          method="POST"
+          class="formulario"
+        >
+          <h2>Registrar</h2>
+          <div class="input-group">
+            <label for="email">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+
+          <div class="input-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email_registro" name="email" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password_registro" name="password" required />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Repetir Contraseña</label>
+            <input type="password" id="password_repetir" name="password" required />
+          </div>
+          <button type="submit" class="btn">REGISTRARSE</button>
+          <p class="inicio">
+            Ya tengo cuenta
+            <span class="sesion">Iniciar sesión</span>
+          </p>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
