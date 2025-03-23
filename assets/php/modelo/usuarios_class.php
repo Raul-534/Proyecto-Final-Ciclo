@@ -1,5 +1,5 @@
 <?php
-require_once 'Conexion.php';
+require_once 'bd_class.php';
 
 class Usuario
 {
@@ -10,9 +10,9 @@ class Usuario
         $this->conexion = new Conectar();
     }
 
-    public function get_email($email)
+    public function obtener_email($email)
     {
-        $stmt = $this->conexion->getConexion()->prepare("SELECT * FROM usuarios WHERE email = :email");
+        $stmt = $this->conexion->getConexion()->prepare("SELECT id_usuario, nombre, email, contraseña FROM usuarios WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -20,37 +20,39 @@ class Usuario
 
     public function registrar($nombre, $email, $password)
     {
-        if ($this->get_email($email)) {
-            return "El usuario ya está registrado";
+        if ($this->obtener_email($email)) {
+            return ['exito' => false, 'message' => 'El usuario ya está registrado'];
         }
-
-        $contraseña_segura = password_hash($password, PASSWORD_BCRYPT);
 
         $stmt = $this->conexion->getConexion()->prepare("INSERT INTO usuarios (nombre, email, contraseña) VALUES (:nombre, :email, :password)");
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $contraseña_segura, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-            return "Registro exitoso";
+            return ['exito' => true, 'message' => 'Registro exitoso'];
         } else {
-            return "Error en el registro";
+            return ['exito' => false, 'message' => 'Error en el registro'];
         }
     }
 
     public function verificarCredenciales($email, $password)
     {
-        $usuario = $this->get_email($email);
+        $usuario = $this->obtener_email($email);
 
         if (!$usuario) {
-            return "Usuario no encontrado";
+            return ['exito' => false, 'message' => 'Usuario no encontrado'];
         }
 
-        if (!password_verify($password, $usuario['contraseña'])) {
-            return "Contraseña incorrecta";
+        if ($password != $usuario['contraseña']) {
+            return ['exito' => false, 'message' => 'Contraseña incorrecta'];
         }
 
-        return "Inicio de sesión exitoso";
+        return [
+            'exito' => true,
+            'id_usuario' => $usuario['id_usuario'],
+            'nombre' => $usuario['nombre']
+        ];
     }
 }
 ?>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gimnasio - Crea tu Rutina</title>
     <!-- Favicon -->
     <link
-      rel="icon"
-      type="image/png"
-      sizes="56x56"
-      href="assets/img/logo.png"
-    />
+        rel="icon"
+        type="image/png"
+        sizes="56x56"
+        href="assets/img/logo.png" />
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- CSS responsive -->
@@ -20,6 +20,7 @@
     <!-- Js -->
     <script src="assets/js/script.js"></script>
 </head>
+
 <body>
     <header>
         <h3><a href="index.html" class="titulo">Gimnasio Online</a></h3>
@@ -28,17 +29,67 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="rutinas.html">Mis Rutinas</a></li>
                 <li><a href="crear_rutina.html">Crear Rutina</a></li>
-                <li><a href="inicio_sesion.html"><img src="assets/img/person.svg" alt="Iniciar sesión" class="icono-sesion"></a></li>
+                <li>
+                    <a href="inicio_sesion.html"><img
+                            src="assets/img/person.svg"
+                            alt="Iniciar sesión"
+                            class="icono-sesion" /></a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
-        
+        <section id="crear-rutina">
+            <h1>Crea tu Rutina</h1>
+            
+            <form id="formRutina" method="POST" action="procesar_rutina.php">
+                <div class="input-group">
+                    <label for="nombre">Nombre de la Rutina:</label>
+                    <input type="text" id="nombre" name="nombre" required />
+                    <span class="error" id="error-nombre"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="objetivo">Objetivo:</label>
+                    <select id="objetivo" name="objetivo" required>
+                        <option value="fuerza">Fuerza</option>
+                        <option value="hipertrofia">Hipertrofia</option>
+                        <option value="resistencia">Resistencia</option>
+                    </select>
+                    <span class="error" id="error-objetivo"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="nivel">Nivel:</label>
+                    <select id="nivel" name="nivel" required>
+                        <option value="principiante">Principiante</option>
+                        <option value="intermedio">Intermedio</option>
+                        <option value="avanzado">Avanzado</option>
+                    </select>
+                    <span class="error" id="error-nivel"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="ejercicios">Selecciona tus ejercicios:</label>
+                    <select id="ejercicios" name="ejercicios[]" multiple required>
+                        <!-- Opciones de ejercicios se cargarán aquí -->
+                    </select>
+                    <span class="error" id="error-ejercicios"></span>
+                </div>
+
+                <div id="repeticiones-series"></div> <!-- Aquí se agregarán las repeticiones y series dinámicamente -->
+
+                <button type="submit">Crear Rutina</button>
+            </form>
+
+        </section>
     </main>
+
 
     <footer>
         <p>&copy; 2025 Gimnasio Online. Todos los derechos reservados.</p>
     </footer>
 </body>
+
 </html>

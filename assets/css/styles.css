@@ -47,9 +47,46 @@ nav ul li a:hover {
   height: 24px;
 }
 
+main {
+  width: 80%;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+input, select {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #333;
+  box-sizing: border-box;
+}
+
+select {
+  background-color: #333;
+}
+
 button {
   background-color: #e63946;
-  color: white;
+  color: #333;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -87,6 +124,7 @@ blockquote {
   margin: 20px auto;
   width: 60%;
 }
+
 .inicio-sesion {
   display: flex;
   justify-content: center;
@@ -167,6 +205,118 @@ blockquote {
 .inicio span:hover {
   text-decoration: underline;
 }
+
+#beneficios {
+  text-align: center;
+  padding: 50px 0;
+  background-color: #1c1c1c;
+}
+
+#beneficios h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.beneficio-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px;
+  gap: 20px;
+  justify-items: center;
+}
+
+.beneficio-item {
+  background-color: #353434;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.beneficio-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.beneficio-item p {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+#advertencias {
+  background-color: #fdd835;
+  padding: 10px;
+  border-radius: 4px;
+  color: #333;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#advertencias p {
+  margin: 0;
+}
+
+#advertencias em {
+  font-weight: bold;
+}
+
+#crear-rutina {
+  text-align: center;
+  padding: 40px;
+  background-color: #1c1c1c;
+}
+
+#crear-rutina form {
+  max-width: 600px;
+  margin: auto;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: #f2f2f2;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #0077b6;
+  border-radius: 5px;
+  background-color: #333;
+  color: #f2f2f2;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #e63946;
+  outline: none;
+}
+
+button {
+  background-color: #e63946;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #b22222;
+}
+
 
 footer {
   background-color: #121212;

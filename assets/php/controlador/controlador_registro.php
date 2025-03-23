@@ -1,28 +1,24 @@
 <?php
-session_start();
-require_once "../modelo/bd_class.php"; 
+require_once '../modelo/usuarios_class.php';
 
-header("Content-Type: application/json");
+$usuario = new Usuario();
+$jsonData = file_get_contents("php://input");
+$datos = json_decode($jsonData, true);
 
-$conexion=new Conexion();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($datos['nombre']) && isset($datos['email']) && isset($datos['password'])) {
+    $nombre = $datos['nombre'];
+    $email = $datos['email'];
+    $password = $datos['password'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $contraseña = $_POST['contraseña'] ?? '';
+    $respuesta = $usuario->registrar($nombre, $email, $password);
 
-    if (empty($email) || empty($contraseña)) {
-        echo json_encode(["success" => false, "message" => "Todos los campos son obligatorios"]);
-        exit();
-    }
-
-    $usuarioId = $prueba->verificarUsuario($email, $contraseña);
-
-    if ($usuarioId) {
-        $_SESSION['usuario_id'] = $usuarioId;
-        echo json_encode(["success" => true, "redirect" => "../vista/tareas.html"]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Credenciales incorrectas"]);
-    }
-    exit();
+    echo json_encode($respuesta);
+    exit;
+} else {
+    echo json_encode([
+        'exito' => false,
+        'message' => 'Solicitud inválida'
+    ]);
+    exit;
 }
 ?>

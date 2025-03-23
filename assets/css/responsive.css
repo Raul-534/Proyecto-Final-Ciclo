@@ -1,0 +1,30 @@
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .beneficio-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+}
+
+@media (max-width: 768px) {
+    main {
+      width: 90%;
+    }
+  
+    header h3 {
+      font-size: 20px;
+    }
+  
+    form {
+      gap: 15px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
+@media (max-width: 480px){
+    .beneficio-container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
