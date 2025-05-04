@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-04-2025 a las 15:02:04
+-- Tiempo de generación: 01-05-2025 a las 19:03:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,7 +34,7 @@ CREATE TABLE `ejercicios` (
   `equipamiento` varchar(50) DEFAULT NULL,
   `dificultad` enum('Básico','Intermedio','Avanzado') NOT NULL DEFAULT 'Básico',
   `id_grupo_muscular` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ejercicios`
@@ -78,19 +78,19 @@ INSERT INTO `ejercicios` (`id_ejercicio`, `nombre`, `descripcion`, `equipamiento
 CREATE TABLE `grupos_musculares` (
   `id_grupo_muscular` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `grupos_musculares`
 --
 
 INSERT INTO `grupos_musculares` (`id_grupo_muscular`, `nombre`) VALUES
-(1, 'Pecho'),
-(2, 'Piernas'),
-(3, 'Espalda'),
+(6, 'Abdominales'),
 (4, 'Brazos'),
+(3, 'Espalda'),
 (5, 'Hombros'),
-(6, 'Abdominales');
+(1, 'Pecho'),
+(2, 'Piernas');
 
 -- --------------------------------------------------------
 
@@ -102,19 +102,22 @@ CREATE TABLE `rutinas` (
   `id_rutina` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `nombre` varchar(100) NOT NULL,
-  `objetivo` enum('fuerza','hipertrofia','resistencia') NOT NULL,
   `nivel` enum('principiante','intermedio','avanzado') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `rutinas`
 --
 
-INSERT INTO `rutinas` (`id_rutina`, `id_usuario`, `nombre`, `objetivo`, `nivel`) VALUES
-(1, NULL, 'Rutina de Fuerza Principiante', 'fuerza', 'principiante'),
-(2, NULL, 'Rutina de Hipertrofia Intermedio', 'hipertrofia', 'intermedio'),
-(3, NULL, 'Rutina de Resistencia Avanzado', 'resistencia', 'avanzado'),
-(4, 1, 'Rutina de Fuerza Personalizada', 'fuerza', 'intermedio');
+INSERT INTO `rutinas` (`id_rutina`, `id_usuario`, `nombre`, `nivel`) VALUES
+(1, NULL, 'Rutina de Fuerza Principiante', 'principiante'),
+(2, NULL, 'Rutina de Hipertrofia Intermedio', 'intermedio'),
+(3, NULL, 'Rutina de Resistencia Avanzado', 'avanzado'),
+(4, 1, 'Rutina de Fuerza Personalizada', 'intermedio'),
+(30, 1, 'rutinaPrueba', 'intermedio'),
+(31, 1, 'rutina de pecho', 'principiante'),
+(38, 2, 'rutina pierna', 'avanzado'),
+(39, 2, 'rutina pecho', 'intermedio');
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,7 @@ CREATE TABLE `rutina_ejercicios` (
   `series` int(11) NOT NULL,
   `repeticiones` int(11) NOT NULL,
   `descanso` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `rutina_ejercicios`
@@ -141,7 +144,23 @@ INSERT INTO `rutina_ejercicios` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercic
 (3, 2, 3, 3, 8, 90),
 (4, 3, 4, 3, 15, 60),
 (5, 4, 1, 4, 6, 120),
-(6, 4, 2, 4, 6, 120);
+(6, 4, 2, 4, 6, 120),
+(7, 1, 1, 3, 10, 60),
+(8, 30, 1, 4, 10, 60),
+(9, 30, 2, 4, 10, 60),
+(10, 30, 3, 4, 10, 60),
+(11, 30, 4, 4, 10, 60),
+(12, 31, 1, 4, 10, 60),
+(13, 31, 7, 4, 10, 60),
+(14, 31, 8, 4, 10, 60),
+(15, 31, 9, 4, 10, 60),
+(45, 38, 11, 6, 10, 60),
+(46, 38, 12, 4, 10, 60),
+(47, 38, 13, 4, 10, 60),
+(48, 38, 2, 4, 10, 60),
+(49, 39, 1, 6, 10, 60),
+(50, 39, 8, 2, 10, 60),
+(51, 39, 9, 4, 12, 58);
 
 -- --------------------------------------------------------
 
@@ -155,7 +174,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) NOT NULL,
   `contraseña` varchar(255) NOT NULL,
   `fecha_registro` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -163,7 +182,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `contraseña`, `fecha_registro`) VALUES
 (1, 'Admin', 'admin@gimnasio.com', 'admin123', '2025-03-15 16:12:34'),
-(2, 'Raul', 'raul@gimnasio.com', '123456789', '2025-03-20 06:34:55');
+(2, 'Raul', 'raul@gimnasio.com', '0123456789', '2025-03-20 06:34:55');
 
 --
 -- Índices para tablas volcadas
@@ -225,19 +244,42 @@ ALTER TABLE `grupos_musculares`
 -- AUTO_INCREMENT de la tabla `rutinas`
 --
 ALTER TABLE `rutinas`
-  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `rutina_ejercicios`
 --
 ALTER TABLE `rutina_ejercicios`
-  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `ejercicios`
+--
+ALTER TABLE `ejercicios`
+  ADD CONSTRAINT `fk_ejercicio_grupo_muscular` FOREIGN KEY (`id_grupo_muscular`) REFERENCES `grupos_musculares` (`id_grupo_muscular`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `rutinas`
+--
+ALTER TABLE `rutinas`
+  ADD CONSTRAINT `fk_rutina_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `rutina_ejercicios`
+--
+ALTER TABLE `rutina_ejercicios`
+  ADD CONSTRAINT `fk_rutina_ejercicio_ejercicio` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicios` (`id_ejercicio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_rutina_ejercicio_rutina` FOREIGN KEY (`id_rutina`) REFERENCES `rutinas` (`id_rutina`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
